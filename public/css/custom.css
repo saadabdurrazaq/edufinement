@@ -1,0 +1,258 @@
+/*!
+ * Bootstrap v3.4.1 (https://getbootstrap.com/)
+ * Copyright 2011-2019 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+.whole-page-overlay{
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: fixed;
+  background: rgba(0,0,0,0.6);
+  width: 100%;
+  height: 100% !important;
+  z-index: 1050;
+  display: none; 
+}
+.whole-page-overlay .center-loader{
+  top: 50%;
+  left: 52%;
+  position: absolute;
+  color: white;
+}
+.part-loader{
+  top: 50%;
+  left: 52%;
+  position: absolute;
+  color: white;
+}
+
+/* Horizontal menu */
+.container{
+  max-width:960px;
+  margin:0 auto;
+  left:50px;
+ }
+ .navecation ul li{
+   list-style:none;
+   float:left;
+   padding-right: 1px;
+ }
+ .navecation ul li a{
+   text-decoration:none;
+   padding:10px 10px;
+   transition: 0.4s;
+ }
+ .navecation ul li a:hover{
+  background-color:#007bff;
+  color:#fff;
+}
+ .current{
+   background-color:#007bff;
+   color:#fff;
+}
+
+/* file input */
+.main-section{
+  margin:0 auto;
+  padding: 20px;
+  margin-top: 100px;
+  background-color: #fff;
+  box-shadow: 0px 0px 20px #c1c1c1;
+}
+.fileinput-remove,
+.fileinput-upload{
+  display: none;
+}
+
+/* menu */
+.btn-login{
+  margin-right: 10px;
+}
+.user-menu {
+  margin-top: 12px;
+  margin-left: -12px;
+}
+
+/* GLOBALS */
+/* DEMO 3 */
+.wrapper-dropdown-3 {
+  /* Size and position */
+  position: relative;
+  
+  margin: 0 auto;
+  padding: 7px;
+
+  /* Styles */
+  background: #fff;
+  
+  cursor: pointer;
+  outline: none;
+
+  /* Font settings */
+  font-weight: bold;
+  color: #8AA8BD;
+}
+
+.wrapper-dropdown-3:after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  margin-top: -3px;
+  
+}
+
+.wrapper-dropdown-3 .dropdowng {
+/* Size & position */
+  position: absolute;
+  top: 100%;
+  left: -255px;
+  right: 0;
+  
+  /* Styles */
+  background: white;
+  border-radius: inherit;
+  border: 1px solid rgba(0,0,0,0.17);
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  font-weight: normal;
+  -webkit-transition: all 0.5s ease-in;
+  -moz-transition: all 0.5s ease-in;
+  -ms-transition: all 0.5s ease-in;
+  -o-transition: all 0.5s ease-in;
+  transition: all 0.5s ease-in;
+  list-style: none;
+
+  /* Hiding */
+  opacity: 0;
+  pointer-events: none;
+}
+.wrapper-dropdown-3 .dropdowng:after{
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  bottom: 100%;
+  right: 15px;
+  border-width: 0 10px 0 10px;
+  border-style: solid;
+  border-color: rgba(0,0,0,0.17) transparent; 
+}
+
+.wrapper-dropdown-3 .dropdowng:before {
+  content: "";
+  width: 200px;
+  height: 0;
+  position: absolute;
+  bottom: 100%;
+  right: 13px;
+  border-width: 0 15px 15px 15px;
+  border-style: solid;
+  border-color:transparent;  
+}
+
+.wrapper-dropdown-3 .dropdowng li a {
+  display: block;
+  padding: 10px;
+  width:100%;
+  text-decoration: none;
+  padding-left: 22px;
+  color: #29303b;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,1); /* border submenu */
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  text-transform: none;
+  font-size: 13px;
+  font-weight: normal;
+  font-family: sf pro text,-apple-system,BlinkMacSystemFont,Roboto,segoe ui,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+}
+
+.wrapper-dropdown-3 .dropdowng li i {
+  float: right;
+  color: inherit;
+}
+
+.wrapper-dropdown-3 .dropdowng li:first-of-type a {
+  border-radius: 7px 7px 0 0;
+}
+
+.wrapper-dropdown-3 .dropdowng li:last-of-type a {
+  border: none;
+  border-radius: 0 0 7px 7px;
+}
+
+/* Hover state */
+
+.wrapper-dropdown-3 .dropdowng li:hover {
+  background: #f3f8f8;
+}
+
+/* Active state */
+
+.wrapper-dropdown-3.active .dropdowng {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* No CSS3 support */
+
+.no-opacity       .wrapper-dropdown-3 .dropdowng,
+.no-pointerevents .wrapper-dropdown-3 .dropdowng {
+  display: none;
+  opacity: 1; /* If opacity support but no pointer-events support */
+  pointer-events: auto; /* If pointer-events support but no pointer-events support */
+}
+
+.no-opacity       .wrapper-dropdown-3.active .dropdowng,
+.no-pointerevents .wrapper-dropdown-3.active .dropdowng {
+  display: block;
+}
+.dropdowng {
+  width: 310px;
+  margin-right: -90px;
+}
+.img-user {
+  width:45px; height:45px; position:relative; left:5px; border-radius:50%;
+}
+.name-email-photo img{
+  width:45px; height:45px; position:relative; border-radius:50%;
+}
+.ml-space-xs {
+  margin-left: 8px;
+}
+.text-midnight {
+  color: #29303b;
+}
+.text-midnight-lighter {
+  color: #686f7a;
+}
+.usr-ava {
+  position: relative;
+  float: left;
+}
+.line{
+  border-bottom: 1px solid #e6e8ea;
+}
+.line-top{
+  border-top: 1px solid #e6e8ea;
+}
+.non-login{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+/* No CSS3 support: none */
+
+/* forms */
+.section-title {
+  border: 0;
+  border-bottom: 1px solid #eee;
+  color: #31708f;
+  padding-bottom: 5px;
+} 

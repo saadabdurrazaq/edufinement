@@ -1,0 +1,207 @@
+AKADEMIK APP LARAVEL 5.8
+
+1. DEFAULT LOGIN & ROLE PERMISSIONS: 
+Tutorial from https://www.itsolutionstuff.com/post/laravel-58-user-roles-and-permissions-tutorialexample.html
+a. composer require spatie/laravel-permission
+   composer require "laravelcollective/html":"^5.8.4"
+b. config/app.php
+c. Spatie tables (role_has_permissions, roles, model_has_roles, permissions, model_has_permissions)
+d. app/Http/Kernel.php
+e. app/Exceptions/Handler.php
+f. routes/web.php
+g. app/Http/Controllers/RoleController.php
+h. resources/views/roles
+i. php artisan make:seeder PermissionTableSeeder
+    it will generate database/seeds/PermissionTableSeeder.php
+    php artisan db:seed --class=PermissionTableSeeder
+j. php artisan make:auth (it will generate single login, forgot password)
+k. app\Models\User.php
+l. app/Http/Controllers/UserController.php
+m. resources/views/users/
+n. public/css/select.css
+o. resource/views/auth
+p. Rename or add permission: RoleController, permission table,
+   code @can('permissionName') at specific part, 
+   then run php artisan permission:cache-reset 
+
+2. STYLE:
+a. resource/views/layouts/adminlte
+b. resource/views/layouts/errors-and-messages.blade.php
+c. public/bower_components
+
+3. BREADCRUMBS
+Tutorial from https://dev.to/jordanirabor/building-dynamic-breadcrumbs-in-laravel-926
+a. composer require davejamesmiller/laravel-breadcrumbs:5.x
+   for reference: https://github.com/davejamesmiller/laravel-breadcrumbs
+b. routes/breadcrumbs.php
+c. views/partials/breadcrumbs.blade.php
+d. create config/breadcrumbs.php by command:
+   php artisan vendor:publish --tag=breadcrumbs-config
+   and make sure there is code 'view' => 'partials.breadcrumbs', at
+   config/breadcrumbs.php
+e. views/layouts/adminlte/app.blade.php
+f. Place the breadcrumbs at every page views
+
+4. GENERATE PDF FILES: (http://localhost/akademik/users/)
+a. composer require barryvdh/laravel-dompdf
+b. add the following code at config/app.php
+'providers' => [
+    ....
+    Barryvdh\DomPDF\ServiceProvider::class,
+],
+'aliases' => [
+    ....
+    'PDF' => Barryvdh\DomPDF\Facade::class,
+],
+c. app/routes/web.php
+d. resources/views/usersadmin/pdf.blade.php
+e. app/Http/Controllers/UserAdminController.php
+
+5. GENERATE XLS FILES: (http://localhost/akademik/users/)
+a. composer require maatwebsite/excel
+b. config/app.php
+c. php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider"
+   Perintah tadi akan generate config/excel.php
+d. php artisan make:export AdminExport --model=Admin
+   Perintah tadi akan generate app/Exports/AdminExport.php
+e. app/routes/web.php
+f. app/Http/Controllers/UserAdminController.php
+
+6. GENERATE DOC FILES: (http://localhost/akademik/users/)
+a. composer require phpoffice/phpword
+b. app/routes/web.php
+c. app/Http/Controllers/UserAdminController.php
+d. resources/views/usersadmin/pdf.blade.php
+
+7. PASSWORD RESET BY EMAIL
+a. php artisan make:notification MailResetPasswordNotification
+   it will generate MailResetPasswordNotification.php inside app/Notifications
+   it's involve code inside toMail() and inside __construct
+b. vendor/laravel/framework/src/illuminate/Auth/Passwords/CanResetPassword.php
+   and it's involve code inside sendPasswordResetNotification()
+c. php artisan vendor:publish 
+   and then choose laravel-notifications
+   or php artisan vendor:publish --tag=laravel-notifications
+   it will generate resources/views/vendor/notifications/email.blade.php
+d. .env file
+e. config/mail.php
+f. php artisan cache:clear
+   php artisan config:clear
+   sudo service apache2 restart
+g. https://myaccount.google.com/security#connectedapps
+   You must turn the option "Allow less secure apps" ON.
+   And generate app password
+   then place that password at .env file
+h. https://accounts.google.com/UnlockCaptcha
+   make it enable
+i. \vendor\swiftmailer\swiftmailer\lib\classes\Swift\Transport\StreamBuffer.php
+
+8. REGISTER FOR APPLICANT
+a. app/Applicant.php
+b. routes/web.php
+c. App/Http/Controllers/ApplicantController.php
+d. resource/views/applicants
+e. app/Notifications/MailForApplicant.php
+f. resource/views/emails/notification.blade.php
+g. app/Notifications/ApprovedApplicant.php
+h. App/Mail/SendEmail.php
+
+9. FACEBOOK LOGIN
+https://medium.com/@confidenceiyke/laravel-5-8-facebook-socialite-authentication-8863b9a43f11
+a. users table and social_facebook_accounts table
+b. composer require laravel/socialite
+c. php artisan make:auth (hanya jika default auth belum tersedia)
+d. web.php
+e. php artisan make:controller SocialController
+f. resource/views/auth/login.blade.php
+g. go to facebook developers site, and add new app (https://sagarmaheshwary.herokuapp.com/posts/Facebook-Login-with-Laravel-and-Socialite)
+   https://developers.facebook.com/
+   buat aplikasi, dalam hal ini aplikasi sudah dibuat yaitu 'Akademik'
+   Pengaturan > Dasar. Copy ID Aplikasi dan Kunci Rahasia Aplikasi ke .env file
+   Masuk Facebook > Pengaturan, isi field Redirect URI OAuth Valid dengan https://localhost/my-project/akademik/auth/facebook/callback
+h. config/services.php
+i. .env file
+j. config/app.php
+k. app/SocialFacebookAccount.php
+l. app/Services/SocialFacebookAccountService.php
+m. resources/views/errors/403.blade.php
+
+10. GOOGLE LOGIN
+https://medium.com/@confidenceiyke/laravel-5-8-google-socialite-authentication-a8b57aa59241
+a. users table and social_google_accounts table
+   php artisan make:migration social_google_accounts table
+   php artisan migrate --path=/database/migrations/2020_05_11_085406_create_social_google_accounts_table.php
+b. composer require laravel/socialite
+c. php artisan make:auth (hanya jika default auth belum tersedia)
+d. web.php
+e. php artisan make:controller SocialAuthGoogleController
+f. resource/views/auth/login.blade.php
+g. go to https://console.cloud.google.com/, 
+   buat project baru jika tidak ada,
+   buat OAuth consent screen
+   buat credentials
+h. config/services.php
+i. .env file
+j. config/app.php
+k. app/SocialGoogleAccount.php
+l. app/Services/SocialGoogleAccountService.php
+m. resources/views/errors/403.blade.php
+
+11. REGISTER WITH SEND EMAIL ON ACCOUNT CONFIRMATION
+a. users table should has verified fields
+b. User.php Model should implements MustVerifyEmail
+c. App/Http/Controllers/RegisterController.php modify create method and create a new method verifyUser and registered
+d. routes/web.php 
+e. resources/views/auth/login.blade.php
+f. resource/views/auth/verify.blade.php
+g. resource/views/layouts/verification.blade.php
+h. app/Http/Controllers/Auth/VerificationController
+
+12. USER PROFILE
+a. routes/web.php 
+b. App/Http/Controllers/ProfileUserController.php
+c. resource/views/profile/show.blade.php
+
+13. CHANGE PASSWORD
+a. routes/web.php 
+b. App/Http/Controllers/ProfileUserController.php
+c. resource/views/profile/show.blade.php
+d. resource/views/profile/changepassword.blade.php
+
+14. DYNAMIC MENU
+a. 
+
+15.STUDENTS REGISTRARS & FATHER REGISTRARS STUDENTS
+a. php artisan make:migration create_parents_students_registrars_table
+   database/migrations/CreateParentsStudentsRegistrarsTable
+   php artisan migrate --path=/database/migrations/2020_06_17_125745_create_parents_students_registrars_table.php
+b. app/Applicant.php
+c. routes/web.php 
+d. StudentRegistrarsController.php
+e. app/Applicant.php relasi ke app/FatherRegistrars.php 
+f. app/FatherRegistrars.php  relasi ke app/Applicant.php
+g. config -> app.php and change 'timezone' => 'Asia/Jakarta'
+h. table father_registrars_student_registrars
+
+PROBLEM:
+STUDENTS REGISTRARS
+1. Multiple hold
+3. Multiple delete permanent 
+
+
+PENDING FEATURE:
+1. Send SMS & WA notif
+2. Show web notif
+3. Show specific failure mail
+4. Show loading icon in specific approve applicant
+
+
+SINGLE HOLD BACK DONE
+
+
+php artisan cache:clear
+php artisan config:clear
+php artisan config:cache
+php artisan route:clear
+php artisan route:cache
+
