@@ -19,10 +19,18 @@ class StudentRegistrars extends Model
 
     public function father_registrars(){
         return $this->belongsToMany('App\FatherRegistrars')->withTrashed(); 
-    }
+    } 
 
     public function mother_registrars(){
         return $this->belongsToMany('App\MotherRegistrars')->withTrashed(); 
+    }
+
+    public function guardianmale_registrars(){
+        return $this->belongsToMany('App\GuardianMaleRegistrars')->withTrashed(); 
+    }
+
+    public function guardianfemale_registrars(){
+        return $this->belongsToMany('App\GuardianFemaleRegistrars')->withTrashed(); 
     }
 
     /** 

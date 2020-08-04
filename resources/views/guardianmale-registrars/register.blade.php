@@ -5,8 +5,8 @@
     <div class="row justify-content-center"> 
         <div class="col-md-8">
             @include('layouts.errors-and-messages')
-            @if (Session::has('success')) 
-                <div class="alert alert-success">
+            @if (Session::has('success'))
+                <div class="alert alert-success"> 
                 {!!Session::get('success')!!}.<br><br>
                 </div>
             @endif
@@ -14,17 +14,17 @@
                 <div class="alert alert-warning">
                     {{ session('warning') }}
                 </div> 
-            @endif 
-            @if(session('status'))
+            @endif
+            @if(session('status')) 
             <div class="alert alert-success">
             {{session('status')}}
             </div>
             @endif 
             <div class="card">
-                <div class="card-header">Register for Student Father / Guardian Male</div>
+                <div class="card-header">Register for Student Guardian Male</div>
 
                 <div class="card-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('father-registrars.store') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('guardianmale-registrars.store') }}">
                         @csrf
                         
                         <div class="col-md-12">

@@ -85,7 +85,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="p-3">
     <h5>Titlee</h5>
     <p>Sidebar content</p>
-    </div>
+    </div> 
 </aside>
 <!-- /.control-sidebar -->
 

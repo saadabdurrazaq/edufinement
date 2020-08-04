@@ -173,7 +173,7 @@ a.
 
 15.STUDENTS REGISTRARS & FATHER REGISTRARS STUDENTS
 a. php artisan make:migration create_parents_students_registrars_table
-   database/migrations/CreateParentsStudentsRegistrarsTable
+   It will create database/migrations/CreateParentsStudentsRegistrarsTable
    php artisan migrate --path=/database/migrations/2020_06_17_125745_create_parents_students_registrars_table.php
 b. app/Applicant.php
 c. routes/web.php 
@@ -185,8 +185,7 @@ h. table father_registrars_student_registrars
 
 PROBLEM:
 STUDENTS REGISTRARS
-1. Multiple hold
-3. Multiple delete permanent 
+1. Multiple delete permanent 
 
 
 PENDING FEATURE:
@@ -204,4 +203,33 @@ php artisan config:clear
 php artisan config:cache
 php artisan route:clear
 php artisan route:cache
+
+
+
+Childerns:
+John Doe: SH, C
+Herbalvora: SH, JM
+Mark Thompson: TM: SB
+Dave Johnson: SH, JM
+Diana Esmeralda: JB, AM
+Donn Felker
+Kelly Williams
+Robert Morris
+
+Parents:
+Sugeng Handoyo.
+Cheerup.
+Jane Miller.
+Tom Morano.
+Sarah Bean.
+James Brian.
+Alice Mitchell.
+Daniella Penny.
+
+Guardians:
+Doni Saputra.
+Nina Puspita.
+Angelica Danial.
+Tony Damian.
+
 

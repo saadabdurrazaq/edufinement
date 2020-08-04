@@ -21,7 +21,7 @@
             </div>
             @endif 
             <div class="card">
-                <div class="card-header">Register for Student Mother</div>
+                <div class="card-header">Register for Student Mother / Guardian Female</div>
 
                 <div class="card-body">
                     <form class="form-horizontal" method="POST" action="{{ route('mother-registrars.store') }}">

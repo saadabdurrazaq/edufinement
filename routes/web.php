@@ -44,6 +44,15 @@ Route::post('/father-regis/store', 'FatherRegistrarsController@store')->name('fa
 Route::get('/mother-regis', 'MotherRegistrarsController@register')->name('mother-regis');
 Route::post('/mother-regis/store', 'MotherRegistrarsController@store')->name('mother-registrars.store');
 
+//Guardian male register page
+/* Route::get('/guardianmale-regis', 'GuardianMaleRegistrarsController@register')->name('guardianmale-regis');
+Route::post('/guardianmale-regis/store', 'GuardianMaleRegistrarsController@store')->name('guardianmale-registrars.store');
+
+//Guardian Female register page
+Route::get('/guardianfemale-regis', 'GuardianFemaleRegistrarsController@register')->name('guardianfemale-regis');
+Route::post('/guardianfemale-regis/store', 'GuardianFemaleRegistrarsController@store')->name('guardianfemale-registrars.store');
+*/
+
 Route::group(['middleware' => ['auth']], function() {
     //Manage Role
     Route::resource('roles','RoleController');

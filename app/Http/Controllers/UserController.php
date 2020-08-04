@@ -70,7 +70,8 @@ class UserController extends Controller
                 $data = \App\User::where('name', 'LIKE', "%$filterKeyword%")->orWhere('email', 'LIKE', "%$filterKeyword%")->paginate($items);
             }
         } 
-    
+        // dd($data);
+        // return;
         return view('users.index', compact('data'))->with(array('showData' => $showData, 'count' => $count, 'activeStatus' => $activeStatus, 'inactiveStatus' => $inactiveStatus, 'countTrash' => $countTrash))->withItems($items); //admin mengacu ke table admin di phpmyadmin
     }
 

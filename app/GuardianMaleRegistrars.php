@@ -7,13 +7,19 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use DB;
- 
-class User extends Authenticatable implements MustVerifyEmail
-{ 
+use Illuminate\Database\Eloquent\Model; 
+
+class GuardianMaleRegistrars extends Model 
+{
     use Notifiable;
-    use HasRoles; //spatie
     use SoftDeletes; //trash user
+    use HasRoles; 
+
+    protected $guard_name = 'web';
+
+    public function student_registrars(){ 
+        return $this->belongsToMany('App\StudentRegistrars')->withTrashed();
+    }
 
     /** 
      * The attributes that are mass assignable.
@@ -41,4 +47,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $table = "guardianmale_registrars";
+    protected $primaryKey = "id";
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateParentsStudentsRegistrarsTable extends Migration
+class CreateGuardianfemaleStudentsRegistrarsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateParentsStudentsRegistrarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('father_registrars_student_registrars', function (Blueprint $table) {
+        Schema::create('guardianfemale_registrars_student_registrars', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('student_registrars_id')->unsigned()->nullable();
-            $table->integer('father_registrars_id')->unsigned()->nullable();
-            $table->integer('mother_registrar_id')->unsigned()->nullable();
+            $table->integer('guardianfemale_registrars_id')->unsigned()->nullable();
             $table->timestamps();
-  
+ 
             $table->foreign('student_registrars_id')->references('id')->on('students_registrars');
-            $table->foreign('father_registrars_id')->references('id')->on('father_registrars');
-            $table->foreign('mother_registrars_id')->references('id')->on('mother_registrars');
+            $table->foreign('guardianfemale_registrars_id')->references('id')->on('guardianfemale_registrars');
         });
     }
 
@@ -33,6 +31,6 @@ class CreateParentsStudentsRegistrarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('father_registrars_student_registrars');
+        Schema::dropIfExists('guardianfemale_registrars_student_registrars');
     }
 }

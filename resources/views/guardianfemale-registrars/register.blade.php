@@ -5,8 +5,8 @@
     <div class="row justify-content-center"> 
         <div class="col-md-8">
             @include('layouts.errors-and-messages')
-            @if (Session::has('success')) 
-                <div class="alert alert-success">
+            @if (Session::has('success'))
+                <div class="alert alert-success"> 
                 {!!Session::get('success')!!}.<br><br>
                 </div>
             @endif
@@ -14,17 +14,17 @@
                 <div class="alert alert-warning">
                     {{ session('warning') }}
                 </div> 
-            @endif 
+            @endif
             @if(session('status'))
             <div class="alert alert-success">
             {{session('status')}}
             </div>
             @endif 
             <div class="card">
-                <div class="card-header">Register for Student Father / Guardian Male</div>
+                <div class="card-header">Register for Student Guardian Female</div>
 
                 <div class="card-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('father-registrars.store') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('guardianfemale-registrars.store') }}">
                         @csrf
                         
                         <div class="col-md-12">
@@ -113,7 +113,7 @@
                                         <div class="form-group">
                                             <label for="gender">Gender</label>
                                             <br>
-                                            <input value="Male" type="radio" id="male" name="gender" checked> <label for="male">Male</label>
+                                            <input value="Female" type="radio" id="female" name="gender" checked> <label for="female">Female</label>
                                             @error('gender')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

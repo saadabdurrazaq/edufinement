@@ -90,8 +90,8 @@
                         <th style="text-align:center;"><input type="checkbox" id="select-all" /></th>
                         <th><b>No</b></th>
                         <th><b>Name</b></th>
-                        <th><b>Email</b></th>
                         <th><b>Parents</b></th>
+                        <th><b>Guardian</b></th>
                         <th><b>Status</b></th>
                         <th><b>Registered Date</b></th>
                         <th><b>Action</b></th>
@@ -103,7 +103,6 @@
             <td style="text-align:center;"><input type="checkbox" id="select" class="sub_chk" data-id="{{$user->id}}" value="{{$user->id}}" name="selected_values[]"/></td>
             <td>{{ $user->id }}</td>
             <td>{{$user->name}}</td>
-            <td>{{$user->email}}</td>  
             <td>
               @foreach($user->father_registrars as $category)
                 <a href="{{ route('father-registrars.show', $category->id) }}">{{$category->name}}.</a>
@@ -111,6 +110,15 @@
               <br>
               @foreach($user->mother_registrars as $mother)
                 <a href="{{ route('mother-registrars.show', $mother->id) }}">{{$mother->name}}.</a>
+              @endforeach
+            </td>
+            <td>
+              @foreach($user->guardianmale_registrars as $category)
+                <a href="">{{$category->name}}.</a>
+              @endforeach
+              <br>
+              @foreach($user->guardianfemale_registrars as $mother)
+                <a href="">{{$mother->name}}.</a>
               @endforeach
             </td>
             <td>

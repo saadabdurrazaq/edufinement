@@ -33,7 +33,7 @@ use App\Mail\OnHoldEmail;
 use Carbon\Carbon;
 use Config;
 
-class FatherRegistrarsController extends Controller
+class GuardianMaleRegistrarsController extends Controller
 {
     
     /**
@@ -43,52 +43,27 @@ class FatherRegistrarsController extends Controller
     */
     public function __construct()
     {
-       
-    }
+        
+    } 
 
     public function register()
     {
-        return view('father-registrars.register');
+        return view('guardianmale-registrars.register');
     }
 
     public function store(Request $request) 
     {
-         $validation = \Validator::make($request->all(),[ 
+         $validation = \Validator::make($request->all(),[
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'unique:student_registrars', 'unique:mother_registrars', 'unique:father_registrars', 'unique:guardianmale_registrars', 'unique:guardianfemale_registrars'],
-            'phone' => ['required', 'digits_between:10,12', 'unique:users', 'unique:student_registrars', 'unique:mother_registrars', 'unique:father_registrars', 'unique:guardianmale_registrars', 'unique:guardianfemale_registrars'],
-            'username' => ['required','min:5', 'max:20', 'unique:users', 'unique:student_registrars', 'unique:mother_registrars', 'unique:father_registrars', 'unique:guardianmale_registrars', 'unique:guardianfemale_registrars', 'regex:/^\S*$/u'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'unique:student_registrars', 'unique:mother_registrars', 'unique:father_registrars'],
+            'phone' => ['required', 'digits_between:10,12', 'unique:users', 'unique:student_registrars', 'unique:mother_registrars', 'unique:father_registrars'],
+            'username' => ['required','min:5', 'max:20', 'unique:users', 'unique:student_registrars', 'unique:mother_registrars', 'unique:father_registrars', 'regex:/^\S*$/u'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'account-key' => 'min:6|required_with:account-key_confirmation|same:account-key_confirmation', 
             'account-key_confirmation' => 'min:6'
         ])->validate();
         
-        $new_user = new \App\FatherRegistrars(); //Panggil model User
-        $new_user->name = $request->get('name');
-        $new_user->email = $request->get('email');
-        $new_user->phone = $request->get('phone');
-        $new_user->username = $request->get('username');
-        $new_user->gender = $request->get('gender');
-        $new_user->password = \Hash::make($request->get('password'));
-        $new_user->account_key = \Hash::make($request->get('account-key'));
-        $new_user->assignRole('Parent');
-        $new_user->save(); 
-
-        $fatherUsername = $request->get('username');
-        $getFatherUsername = \App\FatherRegistrars::where('username',  $fatherUsername)->get();
-
-        $getFatherID = \App\FatherRegistrars::where('username',  $fatherUsername)->first()->id;
-
-        $getSelectedUser = \App\GuardianMaleRegistrars::where('username', function($query) use ($getFatherUsername) { //retrieve a collection of users from users table where username in table users. (continue below)
-            $query->select('username')->from('father_registrars')->where('username', $getFatherUsername); //$query(where usernames in table users) like selected usernames in student_registrars table. (To get selected usernames in student_registrars table, use where('id', $id) parameter.)
-        });
-
-        if($getSelectedUser) {
-            $getSelectedUser->forceDelete(); 
-        } 
-
         $new_user = new \App\GuardianMaleRegistrars(); //Panggil model User
-        $new_user->id = $getFatherID;
         $new_user->name = $request->get('name');
         $new_user->email = $request->get('email');
         $new_user->phone = $request->get('phone');
@@ -96,13 +71,12 @@ class FatherRegistrarsController extends Controller
         $new_user->gender = $request->get('gender');
         $new_user->password = \Hash::make($request->get('password'));
         $new_user->account_key = \Hash::make($request->get('account-key'));
-        $new_user->assignRole('Parent');
+        $new_user->assignRole('Parents');
         $new_user->save();
-
 
         //$new_user->notify(new MailForApplicant($new_user)); 
 
-        return redirect()->route('father-regis')->with('status', 'Registration successfull. Thank you for registration! You will be notified if your child is approved');
+        return redirect()->route('guardianmale-regis')->with('status', 'Registration successfull. Thank you for registration! You will be notified if your child is approved');
     }
 
     /**
