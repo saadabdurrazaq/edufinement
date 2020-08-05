@@ -594,6 +594,471 @@ class StudentRegistrarsController extends Controller
     }
 
     public function approve($id) {
+        // $new_student = \App\StudentRegistrars::where('id', $id);
+        // $new_student->update(['status' => 'Qualified', 'approved_date' => now()]);
+
+        // //delete student from users table to prevent duplicate
+        // $getSelectedUser = \App\User::where('username', function($query) use ($id) { //retrieve a collection of users from users table where username in table users. (continue below)
+        //     $query->select('username')->from('student_registrars')->where('id', $id); //$query(where usernames in table users) like selected usernames in student_registrars table. (To get selected usernames in student_registrars table, use where('id', $id) parameter.)
+        // });
+
+        // if($getSelectedUser) {
+        //     $getSelectedUser->forceDelete(); 
+        // } 
+
+        // $student = \App\StudentRegistrars::find($id);
+
+        // //clone student father to users table
+        // foreach($student->father_registrars as $getFatherData) {
+        //     $fatherID = $getFatherData->id;
+        //     $guardianMaleUsername = $getFatherData->username;
+        //     $updateFather = \App\FatherRegistrars::where('id', $fatherID);
+        //     $updateFather->update(['status' => 'Qualified', 'approved_date' => now()]);
+
+        //     $getFather = \App\User::where('username', $getFatherData->username);
+        //     if($getFather) {
+        //        $getFather->forceDelete();
+        //     }
+
+        //     $isStudentExist = \App\StudentRegistrars::withTrashed()->where('status', 'Qualified')->whereHas('guardianmale_registrars', function($q) use($guardianMaleUsername) {
+        //         $q->where('guardianmale_registrars.username', $guardianMaleUsername);
+        //     })->count();
+
+        //     $getFatherData->makeHidden(['status', 'id', 'account_key']);
+        //     $replicaFatherData = $getFatherData->replicate();
+        //     $fatherDatatoArray = $replicaFatherData->toArray();
+        //     $father = \App\User::firstOrCreate($fatherDatatoArray);
+        //     if($isStudentExist >= 1) {
+        //         $father->assignRole(['Parent', 'Guardian']);
+        //     } else {
+        //         $father->assignRole('Parent');
+        //     }
+        //     $father->password = $getFatherData->password;
+        //     $father->save();
+        //     //$user->notify(new ApprovedApplicant($user));
+        // }
+
+        //  //clone student mother to users table
+        // foreach($student->mother_registrars as $getMotherData) {
+        //     $motherID = $getMotherData->id;
+        //     $guardianFemaleUsername = $getMotherData->username;
+        //     $updateMother = \App\MotherRegistrars::where('id', $motherID);
+        //     $updateMother->update(['status' => 'Qualified', 'approved_date' => now()]);
+
+        //     $getMother = \App\User::where('username', $getMotherData->username);
+        //     if($getMother) {
+        //        $getMother->forceDelete();
+        //     }
+
+        //     $isStudentExist = \App\StudentRegistrars::withTrashed()->where('status', 'Qualified')->whereHas('guardianfemale_registrars', function($q) use($guardianFemaleUsername) {
+        //         $q->where('guardianfemale_registrars.username', $guardianFemaleUsername);
+        //     })->count();
+
+        //     $getMotherData->makeHidden(['status', 'id', 'account_key']);
+        //     $replicaMotherData = $getMotherData->replicate();
+        //     $motherDatatoArray = $replicaMotherData->toArray(); 
+        //     $mother = \App\User::firstOrCreate($motherDatatoArray);
+        //     if($isStudentExist >= 1) {
+        //         $mother->assignRole(['Parent', 'Guardian']);
+        //     } else {
+        //         $mother->assignRole('Parent');
+        //     }
+        //     $mother->password = $getMotherData->password;
+        //     $mother->save();
+        //     //$user->notify(new ApprovedApplicant($user));
+        // }
+
+        // //clone student guardian male to users table
+        // foreach($student->guardianmale_registrars as $getGuardianMaleData) {
+        //     $guardianMaleID = $getGuardianMaleData->id;
+        //     $guardianMaleUsername = $getGuardianMaleData->username;
+        //     $updateGuardianMale = \App\GuardianMaleRegistrars::where('id', $guardianMaleID);
+        //     $updateGuardianMale->update(['status' => 'Qualified', 'approved_date' => now()]);
+
+        //     $guardianMale = \App\User::where('username', $getGuardianMaleData->username);
+        //     if($guardianMale) {
+        //        $guardianMale->forceDelete();
+        //     } 
+
+        //     $isStudentExist = \App\StudentRegistrars::withTrashed()->where('status', 'Qualified')->whereHas('father_registrars', function($q) use($guardianMaleUsername) {
+        //         $q->where('father_registrars.username', $guardianMaleUsername);
+        //     })->count();
+
+        //     $getGuardianMaleData->makeHidden(['status', 'id', 'account_key']);
+        //     $replicaGuardianMaleData = $getGuardianMaleData->replicate();
+        //     $guardianMaleDatatoArray = $replicaGuardianMaleData->toArray(); 
+        //     $guardianMale = \App\User::firstOrCreate($guardianMaleDatatoArray);
+        //     if($isStudentExist >= 1) {
+        //         $guardianMale->assignRole(['Parent', 'Guardian']);
+        //     } else {
+        //         $guardianMale->assignRole('Guardian');
+        //     }
+        //     $guardianMale->password = $getGuardianMaleData->password;
+        //     $guardianMale->save();
+        // }
+
+        // //clone student guardian female to users table
+        // foreach($student->guardianfemale_registrars as $getGuardianFemaleData) {
+        //     $guardianFemaleID = $getGuardianFemaleData->id;
+        //     $guardianFemaleUsername = $getGuardianFemaleData->username;
+        //     $updateGuardianFemale = \App\GuardianFemaleRegistrars::where('id', $guardianFemaleID);
+        //     $updateGuardianFemale->update(['status' => 'Qualified', 'approved_date' => now()]);
+
+        //     $guardianFemale = \App\User::where('username', $getGuardianFemaleData->username);
+        //     if($guardianFemale) {
+        //        $guardianFemale->forceDelete();
+        //     } 
+
+        //     $isStudentExist = \App\StudentRegistrars::withTrashed()->where('status', 'Qualified')->whereHas('mother_registrars', function($q) use($guardianFemaleUsername) {
+        //         $q->where('mother_registrars.username', $guardianFemaleUsername);
+        //     })->count();
+
+        //     $getGuardianFemaleData->makeHidden(['status', 'id', 'account_key']);
+        //     $replicaGuardianFemaleData = $getGuardianFemaleData->replicate();
+        //     $guardianFemaleDatatoArray = $replicaGuardianFemaleData->toArray(); 
+        //     $guardianFemale = \App\User::firstOrCreate($guardianFemaleDatatoArray);
+        //     if($isStudentExist >= 1) {
+        //         $guardianFemale->assignRole(['Parent', 'Guardian']);
+        //     } else {
+        //         $guardianFemale->assignRole('Guardian');
+        //     }
+        //     $guardianFemale->password = $getGuardianFemaleData->password;
+        //     $guardianFemale->save();
+        //     //$user->notify(new ApprovedApplicant($user));
+        // }
+
+        // //clone student to users table
+        // $find_one = \App\StudentRegistrars::where('id', $id)->firstOrFail();
+        // $find_one->makeHidden(['status', 'id', 'email_sent']);
+        // $new_user = $find_one->replicate();
+        // $new_user = $find_one->toArray();
+
+        // $user = \App\User::firstOrCreate($new_user);
+        // $user->assignRole('Student');
+        // $user->password = $find_one->password;
+        // $user->save();
+        // //$user->notify(new ApprovedApplicant($user)); 
+            
+        $this->approveUser($id);
+        return redirect()->route('student-registrars.showeligible')->with('status', 'User successfully approved');
+    }
+    
+    public function approveMultiple(Request $request) {
+        $get_ids = $request->ids;
+        $ids = explode(',', $get_ids); 
+
+        // precess request one by one
+        foreach ($ids as $id) {
+            $this->approveUser($id);
+        }
+
+        return response()->json(['success' => "Selected applicant(s) successfully approved."]);
+
+
+        // //clone student registrars within ids
+        // $find_selected = \App\StudentRegistrars::whereIn('id', $ids)->get();
+        // $find_selected->makeHidden(['status', 'id', 'email_sent']);
+        // $find_selected->makeVisible(['password']);
+        // $new_students = $find_selected->toArray();  
+
+        // //clone father registrars who has students within ids
+        // $cloneFathers = \App\FatherRegistrars::whereHas('student_registrars', function($q) use($ids) {
+        //     $q->whereIn('student_registrars.id', $ids);
+        // })->get();
+        // $cloneFathers->makeHidden(['status', 'id', 'email_sent']);
+        // $cloneFathers->makeVisible(['password']);
+        // $new_fathers = $cloneFathers->toArray();
+
+        // //clone mother registrars who has students within ids
+        // $cloneMothers = \App\MotherRegistrars::whereHas('student_registrars', function($q) use($ids) {
+        //     $q->whereIn('student_registrars.id', $ids);
+        // })->get();
+        // $cloneMothers->makeHidden(['status', 'id', 'email_sent']);
+        // $cloneMothers->makeVisible(['password']);
+        // $new_mothers = $cloneMothers->toArray();
+
+        // //clone guardian male registrars who has students within ids
+        // $cloneGuardianMales = \App\GuardianMaleRegistrars::whereHas('student_registrars', function($q) use($ids) {
+        //     $q->whereIn('student_registrars.id', $ids);
+        // })->get();
+        // $cloneGuardianMales->makeHidden(['status', 'id', 'email_sent']);
+        // $cloneGuardianMales->makeVisible(['password']);
+        // $new_GuardianMales = $cloneGuardianMales->toArray();
+
+        // //clone guardian female registrars who has students within ids
+        // $cloneGuardianFemales = \App\GuardianFemaleRegistrars::whereHas('student_registrars', function($q) use($ids) {
+        //     $q->whereIn('student_registrars.id', $ids);
+        // })->get();
+        // $cloneGuardianFemales->makeHidden(['status', 'id', 'email_sent']);
+        // $cloneGuardianFemales->makeVisible(['password']);
+        // $new_GuardianFemales = $cloneGuardianFemales->toArray();
+
+        // //get student registrars within ids
+        // $students = \App\StudentRegistrars::whereIn('id', $ids);
+
+        // //get father registrars who has students within ids
+        // $getBulkFather = \App\FatherRegistrars::whereHas('student_registrars', function($q) use($ids) {
+        //     $q->whereIn('student_registrars.id', $ids);
+        // });
+
+        // //get mother registrars who has students within ids
+        // $getBulkMother = \App\MotherRegistrars::whereHas('student_registrars', function($q) use($ids) {
+        //     $q->whereIn('student_registrars.id', $ids);
+        // });
+
+        // //////////////////////////////////////////
+ 
+        // $getBulkFather->update(['status' => 'Qualified']); 
+        // $getBulkMother->update(['status' => 'Qualified']); 
+        // $students->update(['status' => 'Qualified', 'approved_date' => now()]);
+        
+        // //////////////////////////////////////////
+
+        // $isStudentsExist = \App\User::whereIn('username', function($query) use($ids) { //retrieve a collection of users from users table whereIn usernames. (continue below)
+        //     $query->select('username')->from('student_registrars')->whereIn('id', $ids); //$query(whereIn usernames in table users) like selected usernames in student_registrars table. (To get selected usernames in applicants table, use whereIn('id', $ids) parameter.)
+        // });
+
+        // //Insert new students
+        // if($isStudentsExist) {
+        //    $isStudentsExist->forceDelete(); //prevent duplicate data in users table
+        //    $bulkUsers = \App\User::insert($new_students);
+        // } else {
+        //     $bulkUsers = \App\User::insert($new_students);
+        // }
+
+        // $getSelectedUsers = \App\User::whereIn('username', function($query) use($ids) { //retrieve a collection of users from users table whereIn usernames. (continue below)
+        //     $query->select('username')->from('student_registrars')->whereIn('id', $ids); //$query(whereIn usernames in table users) like selected usernames in applicants table. (To get selected usernames in applicants table, use whereIn('id', $ids) parameter.)
+        // })->get();
+        
+        // foreach($getSelectedUsers as $user) {
+        //     $user->assignRole('Student');
+        //     $user->save();
+        // } 
+
+        // //////////////////////////////////////////
+
+        // $getFatherUsername = \App\FatherRegistrars::select('username')->whereHas('student_registrars', function($q) use($ids) {
+        //     $q->whereIn('student_registrars.id', $ids);
+        // })->get();
+
+        // $isFathersExist = \App\User::whereIn('username', function($query) use($getFatherUsername) { //retrieve a collection of users from users table whereIn usernames. (continue below)
+        //     $query->select('username')->from('father_registrars')->whereIn('username', $getFatherUsername); //$query(whereIn usernames in table users) like selected usernames in father_registrars table. (To get selected usernames in father_registrars table, use whereIn('id', $ids) parameter.)
+        // });
+
+        // //Insert new fathers
+        // if($isFathersExist) {
+        //     $isFathersExist->forceDelete(); //prevent duplicate data in users table
+        //     $bulkUsers = \App\User::insert($new_fathers);
+        //  } else {
+        //      $bulkUsers = \App\User::insert($new_fathers);
+        //  }
+ 
+        //  $getSelectedFathers = \App\User::whereIn('username', function($query) use($getFatherUsername) { //retrieve a collection of users from users table whereIn usernames. (continue below)
+        //      $query->select('username')->from('father_registrars')->whereIn('username', $getFatherUsername); //$query(whereIn usernames in users table) like selected usernames in father_registrars table. (To get selected usernames in applicants table, use whereIn('id', $ids) parameter.)
+        //  })->get();
+
+        // //check if father has qualified adopted childern (students) (PROBLEM LAYS HERE)
+
+        // //retrieve a qualified student registrars username who has guardian male username like $getFatherUsername
+        // $studentsUsername = \App\StudentRegistrars::withTrashed()->where('status', 'Qualified')->whereHas('guardianmale_registrars', function($q) use($getFatherUsername) {
+        //     $q->whereIn('guardianmale_registrars.username', $getFatherUsername);
+        // })->select('username')->get();
+
+        // $studentsCredential = \App\StudentRegistrars::whereIn('username', $studentsUsername); //if($studentsCredential == 0), give role as a parent only*/
+
+        // //retrieve guardian male username who doesnt have qualified student registrars (adopted childerns)
+        // /* $guardianMaleUsername = \App\GuardianMaleRegistrars::withTrashed()->whereIn('username', $getFatherUsername)->doesntHave('student_registrars', 'and', function($q) {
+        //     $q->where('student_registrars.status', 'Qualified');
+        // })->select('username')->get();
+
+        // //retrieve a guardian male (who doesnt have a qualified student registrars (childerns)). If the result is zero, give role as a parent only. 
+        // $guardianMaleCredential = \App\User::whereIn('username', $guardianMaleUsername); //if($guardianMaleCredential) is not found, give role as a parent only */
+        
+        // if($studentsCredential) { 
+        //     foreach($getSelectedFathers as $user) {
+        //         $user->assignRole('Parent');
+        //         $user->save();
+        //     }
+        // } else {
+        //     foreach($getSelectedFathers as $user) {
+        //         $user->assignRole(['Parent', 'Guardian']);
+        //         $user->save();
+        //     }
+        // }
+
+        // //////////////////////////////////////////
+
+        // $getGuardianMaleUsername = \App\GuardianMaleRegistrars::select('username')->whereHas('student_registrars', function($q) use($ids) {
+        //     $q->whereIn('student_registrars.id', $ids);
+        // })->get();
+
+        // $isGuardianMalesExist = \App\User::whereIn('username', function($query) use($getGuardianMaleUsername) { //retrieve a collection of users from users table whereIn usernames. (continue below)
+        //     $query->select('username')->from('guardianmale_registrars')->whereIn('username', $getGuardianMaleUsername); //$query(whereIn usernames in table users) like selected usernames in father_registrars table. (To get selected usernames in father_registrars table, use whereIn('id', $ids) parameter.)
+        // });
+
+        // //Insert new guardian male
+        // if($isGuardianMalesExist) {
+        //     $isGuardianMalesExist->forceDelete(); //prevent duplicate data in users table
+        //     $bulkUsers = \App\User::insert($new_GuardianMales);
+        // } else {
+        //     $bulkUsers = \App\User::insert($new_GuardianMales);
+        // }
+ 
+        // $getSelectedGuardianMales = \App\User::whereIn('username', function($query) use($getGuardianMaleUsername) { //retrieve a collection of users from users table whereIn usernames. (continue below)
+        //     $query->select('username')->from('guardianmale_registrars')->whereIn('username', $getGuardianMaleUsername); //$query(whereIn usernames in table users) like selected usernames in applicants table. (To get selected usernames in applicants table, use whereIn('id', $ids) parameter.)
+        // })->get();
+
+        // //check if guardian male has qualified adopted childern (students) (PROBLEM LAYS HERE)
+
+        // //retrieve qualified student registrars username who has father username like $getGuardianMaleUsername
+        // $studentsFatherUsername = \App\StudentRegistrars::withTrashed()->where('status', 'Qualified')->whereHas('father_registrars', function($q) use($getGuardianMaleUsername) {
+        //     $q->whereIn('father_registrars.username', $getGuardianMaleUsername);
+        // })->select('username')->get();
+
+        // $studentsFatherCredential = \App\StudentRegistrars::whereIn('username', $studentsFatherUsername); //if($studentsFatherCredential == 0) */
+
+        // //retrieve father username who doesnt have qualified student registrars (adopted childerns)
+        // /* $fatherUsername = \App\FatherRegistrars::withTrashed()->whereIn('username', $getGuardianMaleUsername)->doesntHave('student_registrars', 'and', function($q) {
+        //     $q->where('student_registrars.status', 'Qualified');
+        // })->select('username')->get();
+
+        // //retrieve a fathers (who doesnt have a qualified student registrars (childerns)). If the result is zero, give role as a parent only. 
+        // $studentsFatherCredential = \App\User::whereIn('username', $fatherUsername); //if($studentsFatherCredential) */
+        
+        // if($studentsFatherCredential) {  
+        //     foreach($getSelectedGuardianMales as $user) {
+        //         $user->assignRole('Guardian');
+        //         $user->save();
+        //     }
+        // } else {
+        //     foreach($getSelectedGuardianMales as $user) {
+        //         $user->assignRole(['Parent', 'Guardian']);
+        //         $user->save();
+        //     }
+        // }
+
+        // //////////////////////////////////////////
+
+        // $getMotherUsername = \App\MotherRegistrars::select('username')->whereHas('student_registrars', function($q) use($ids) {
+        //     $q->whereIn('student_registrars.id', $ids);
+        // })->get();
+
+        // $isMothersExist = \App\User::whereIn('username', function($query) use($getMotherUsername) { //retrieve a collection of users from users table whereIn usernames. (continue below)
+        //     $query->select('username')->from('mother_registrars')->whereIn('username', $getMotherUsername); //$query(whereIn usernames in table users) like selected usernames in father_registrars table. (To get selected usernames in father_registrars table, use whereIn('id', $ids) parameter.)
+        // });
+
+        // //Insert new mothers
+        // if($isMothersExist) {
+        //     $isMothersExist->forceDelete(); //prevent duplicate data in users table
+        //     $bulkUsers = \App\User::insert($new_mothers);
+        //  } else {
+        //      $bulkUsers = \App\User::insert($new_mothers);
+        //  }
+ 
+        //  $getSelectedMothers = \App\User::whereIn('username', function($query) use($getMotherUsername) { //retrieve a collection of users from users table whereIn usernames. (continue below)
+        //      $query->select('username')->from('mother_registrars')->whereIn('username', $getMotherUsername); //$query(whereIn usernames in table users) like selected usernames in applicants table. (To get selected usernames in applicants table, use whereIn('id', $ids) parameter.)
+        //  })->get();
+
+        //  //check if mother has qualified adopted childern (students) (PROBLEM LAYS HERE)
+
+        // //retrieve a qualified student registrars username who has guardian female username like $getMotherUsername
+        // $studentsGFUsername = \App\StudentRegistrars::withTrashed()->where('status', 'Qualified')->whereHas('guardianfemale_registrars', function($q) use($getMotherUsername) {
+        //     $q->whereIn('guardianfemale_registrars.username', $getMotherUsername);
+        // })->select('username')->get();
+
+        // $studentsGFCredential = \App\StudentRegistrars::whereIn('username', $studentsGFUsername)->count(); //if($studentsGFCredential == 0), give role as a parent only*/
+
+        // //retrieve guardian female username who doesnt have qualified student registrars (adopted childerns)
+        // /* $guardianFemaleUsername = \App\GuardianFemaleRegistrars::withTrashed()->whereIn('username', $getMotherUsername)->doesntHave('student_registrars', 'and', function($q) {
+        //     $q->where('student_registrars.status', 'Qualified');
+        // })->select('username')->get();
+
+        // //retrieve a guardian female (who doesnt have a qualified student registrars (adopted childerns)). If the result is zero, give role as a parent only. 
+        // $guardianFemaleCredential = \App\User::whereIn('username', $guardianFemaleUsername); //if($guardianFemaleCredential) is not found, give role as a parent only */
+        
+        // if($studentsGFCredential == 0) {
+        //     foreach($getSelectedMothers as $user) {
+        //         $user->assignRole('Parent');
+        //         $user->save();
+        //     }
+        // } else {
+        //     foreach($getSelectedMothers as $user) {
+        //         $user->assignRole(['Parent', 'Guardian']);
+        //         $user->save();
+        //     }
+        // }
+
+        // //////////////////////////////////////////
+
+        // $getGuardianFemaleUsername = \App\GuardianFemaleRegistrars::select('username')->whereHas('student_registrars', function($q) use($ids) {
+        //     $q->whereIn('student_registrars.id', $ids);
+        // })->get();
+
+        // $isGuardianFemalesExist = \App\User::whereIn('username', function($query) use($getGuardianFemaleUsername) { //retrieve a collection of users from users table whereIn usernames. (continue below)
+        //     $query->select('username')->from('guardianfemale_registrars')->whereIn('username', $getGuardianFemaleUsername); //$query(whereIn usernames in table users) like selected usernames in father_registrars table. (To get selected usernames in father_registrars table, use whereIn('id', $ids) parameter.)
+        // });
+
+        // //Insert new guardian female
+        // if($isGuardianFemalesExist) {
+        //     $isGuardianFemalesExist->forceDelete(); //prevent duplicate data in users table
+        //     $bulkUsers = \App\User::insert($new_GuardianFemales);
+        //     //$bulkUsers = \App\User::insert($new_mothers);
+        // } else {
+        //     $bulkUsers = \App\User::insert($new_GuardianFemales);
+        // }
+ 
+        // $getSelectedGuardianFemales = \App\User::whereIn('username', function($query) use($getGuardianFemaleUsername) { //retrieve a collection of users from users table whereIn usernames. (continue below)
+        //     $query->select('username')->from('guardianfemale_registrars')->whereIn('username', $getGuardianFemaleUsername); //$query(whereIn usernames in table users) like selected usernames in applicants table. (To get selected usernames in applicants table, use whereIn('id', $ids) parameter.)
+        // })->get();
+
+        // //check if mother has qualified adopted childern (students) (PROBLEM LAYS HERE)
+
+        // //retrieve qualified student registrars username who has mother username like $getGuardianFemaleUsername
+        // $studentsMotherUsername = \App\StudentRegistrars::withTrashed()->where('status', 'Qualified')->whereHas('mother_registrars', function($q) use($getGuardianFemaleUsername) {
+        //     $q->whereIn('mother_registrars.username', $getGuardianFemaleUsername);
+        // })->select('username')->get();
+
+        // $studentsMotherCredential = \App\StudentRegistrars::whereIn('username', $studentsMotherUsername)->count();
+
+        // //retrieve mother username who doesnt have qualified student registrars (adopted childerns)
+        // /* $motherUsername = \App\MotherRegistrars::withTrashed()->whereIn('username', $getGuardianFemaleUsername)->doesntHave('student_registrars', 'and', function($q) {
+        //     $q->where('student_registrars.status', 'Qualified');
+        // })->select('username')->get();
+
+        // //retrieve a fathers (who doesnt have a qualified student registrars ( adoptedchilderns)). If the result is zero, give role as a parent only. 
+        // $studentsMotherCredential = \App\User::whereIn('username', $motherUsername); //if($studentsFemtherCredential) */
+        
+        // if($studentsMotherCredential == 0) {
+        //     foreach($getSelectedGuardianFemales as $user) {
+        //         $user->assignRole('Guardian');
+        //         $user->save();
+        //     }
+        // } else {
+        //     foreach($getSelectedGuardianFemales as $user) {
+        //         $user->assignRole(['Parent', 'Guardian']);
+        //         $user->save();
+        //     }
+        // }
+         
+        //////////////////////////////////////////
+
+        /* $users->each(function($user) {
+            Mail::to($user)->send(new SendEmail());
+        });
+
+        if(count(Mail::failures()) > 0) {
+            //The Mail::failures() will return an array of failed emails.
+            foreach(Mail::failures() as $sent_status) { 
+                $newData = \App\SentStatus::create(['email' => $sent_status]);
+                $newData->save();
+            }
+        } */
+
+        // return response()->json(['success' => "Selected applicant(s) successfully approved."]);
+    }
+
+    public function approveUser($id)
+    {
         $new_student = \App\StudentRegistrars::where('id', $id);
         $new_student->update(['status' => 'Qualified', 'approved_date' => now()]);
 
@@ -724,7 +1189,6 @@ class StudentRegistrarsController extends Controller
             }
             $guardianFemale->password = $getGuardianFemaleData->password;
             $guardianFemale->save();
-            //$user->notify(new ApprovedApplicant($user));
         }
 
         //clone student to users table
@@ -737,315 +1201,6 @@ class StudentRegistrarsController extends Controller
         $user->assignRole('Student');
         $user->password = $find_one->password;
         $user->save();
-        //$user->notify(new ApprovedApplicant($user)); 
-      
-        return redirect()->route('student-registrars.showeligible')->with('status', 'User successfully approved');
-    }
-
-    public function approveMultiple(Request $request) {
-        $get_ids = $request->ids;
-        $ids = explode(',', $get_ids); 
-
-        //clone student registrars within ids
-        $find_selected = \App\StudentRegistrars::whereIn('id', $ids)->get();
-        $find_selected->makeHidden(['status', 'id', 'email_sent']);
-        $find_selected->makeVisible(['password']);
-        $new_students = $find_selected->toArray();  
-
-        //clone father registrars who has students within ids
-        $cloneFathers = \App\FatherRegistrars::whereHas('student_registrars', function($q) use($ids) {
-            $q->whereIn('student_registrars.id', $ids);
-        })->get();
-        $cloneFathers->makeHidden(['status', 'id', 'email_sent']);
-        $cloneFathers->makeVisible(['password']);
-        $new_fathers = $cloneFathers->toArray();
-
-        //clone mother registrars who has students within ids
-        $cloneMothers = \App\MotherRegistrars::whereHas('student_registrars', function($q) use($ids) {
-            $q->whereIn('student_registrars.id', $ids);
-        })->get();
-        $cloneMothers->makeHidden(['status', 'id', 'email_sent']);
-        $cloneMothers->makeVisible(['password']);
-        $new_mothers = $cloneMothers->toArray();
-
-        //clone guardian male registrars who has students within ids
-        $cloneGuardianMales = \App\GuardianMaleRegistrars::whereHas('student_registrars', function($q) use($ids) {
-            $q->whereIn('student_registrars.id', $ids);
-        })->get();
-        $cloneGuardianMales->makeHidden(['status', 'id', 'email_sent']);
-        $cloneGuardianMales->makeVisible(['password']);
-        $new_GuardianMales = $cloneGuardianMales->toArray();
-
-        //clone guardian female registrars who has students within ids
-        $cloneGuardianFemales = \App\GuardianFemaleRegistrars::whereHas('student_registrars', function($q) use($ids) {
-            $q->whereIn('student_registrars.id', $ids);
-        })->get();
-        $cloneGuardianFemales->makeHidden(['status', 'id', 'email_sent']);
-        $cloneGuardianFemales->makeVisible(['password']);
-        $new_GuardianFemales = $cloneGuardianFemales->toArray();
-
-        //get student registrars within ids
-        $students = \App\StudentRegistrars::whereIn('id', $ids);
-
-        //get father registrars who has students within ids
-        $getBulkFather = \App\FatherRegistrars::whereHas('student_registrars', function($q) use($ids) {
-            $q->whereIn('student_registrars.id', $ids);
-        });
-
-        //get mother registrars who has students within ids
-        $getBulkMother = \App\MotherRegistrars::whereHas('student_registrars', function($q) use($ids) {
-            $q->whereIn('student_registrars.id', $ids);
-        });
-
-        //////////////////////////////////////////
- 
-        $getBulkFather->update(['status' => 'Qualified']); 
-        $getBulkMother->update(['status' => 'Qualified']); 
-        $students->update(['status' => 'Qualified', 'approved_date' => now()]);
-        
-        //////////////////////////////////////////
-
-        $isStudentsExist = \App\User::whereIn('username', function($query) use($ids) { //retrieve a collection of users from users table whereIn usernames. (continue below)
-            $query->select('username')->from('student_registrars')->whereIn('id', $ids); //$query(whereIn usernames in table users) like selected usernames in student_registrars table. (To get selected usernames in applicants table, use whereIn('id', $ids) parameter.)
-        });
-
-        //Insert new students
-        if($isStudentsExist) {
-           $isStudentsExist->forceDelete(); //prevent duplicate data in users table
-           $bulkUsers = \App\User::insert($new_students);
-        } else {
-            $bulkUsers = \App\User::insert($new_students);
-        }
-
-        $getSelectedUsers = \App\User::whereIn('username', function($query) use($ids) { //retrieve a collection of users from users table whereIn usernames. (continue below)
-            $query->select('username')->from('student_registrars')->whereIn('id', $ids); //$query(whereIn usernames in table users) like selected usernames in applicants table. (To get selected usernames in applicants table, use whereIn('id', $ids) parameter.)
-        })->get();
-        
-        foreach($getSelectedUsers as $user) {
-            $user->assignRole('Student');
-            $user->save();
-        } 
-
-        //////////////////////////////////////////
-
-        $getFatherUsername = \App\FatherRegistrars::select('username')->whereHas('student_registrars', function($q) use($ids) {
-            $q->whereIn('student_registrars.id', $ids);
-        })->get();
-
-        $isFathersExist = \App\User::whereIn('username', function($query) use($getFatherUsername) { //retrieve a collection of users from users table whereIn usernames. (continue below)
-            $query->select('username')->from('father_registrars')->whereIn('username', $getFatherUsername); //$query(whereIn usernames in table users) like selected usernames in father_registrars table. (To get selected usernames in father_registrars table, use whereIn('id', $ids) parameter.)
-        });
-
-        //Insert new fathers
-        if($isFathersExist) {
-            $isFathersExist->forceDelete(); //prevent duplicate data in users table
-            $bulkUsers = \App\User::insert($new_fathers);
-         } else {
-             $bulkUsers = \App\User::insert($new_fathers);
-         }
- 
-         $getSelectedFathers = \App\User::whereIn('username', function($query) use($getFatherUsername) { //retrieve a collection of users from users table whereIn usernames. (continue below)
-             $query->select('username')->from('father_registrars')->whereIn('username', $getFatherUsername); //$query(whereIn usernames in users table) like selected usernames in father_registrars table. (To get selected usernames in applicants table, use whereIn('id', $ids) parameter.)
-         })->get();
-
-        //check if father has qualified adopted childern (students) (PROBLEM LAYS HERE)
-
-        //retrieve a qualified student registrars username who has guardian male username like $getFatherUsername
-        $studentsUsername = \App\StudentRegistrars::withTrashed()->where('status', 'Qualified')->whereHas('guardianmale_registrars', function($q) use($getFatherUsername) {
-            $q->whereIn('guardianmale_registrars.username', $getFatherUsername);
-        })->select('username')->get();
-
-        $studentsCredential = \App\StudentRegistrars::whereIn('username', $studentsUsername); //if($studentsCredential == 0), give role as a parent only*/
-
-        //retrieve guardian male username who doesnt have qualified student registrars (adopted childerns)
-        /* $guardianMaleUsername = \App\GuardianMaleRegistrars::withTrashed()->whereIn('username', $getFatherUsername)->doesntHave('student_registrars', 'and', function($q) {
-            $q->where('student_registrars.status', 'Qualified');
-        })->select('username')->get();
-
-        //retrieve a guardian male (who doesnt have a qualified student registrars (childerns)). If the result is zero, give role as a parent only. 
-        $guardianMaleCredential = \App\User::whereIn('username', $guardianMaleUsername); //if($guardianMaleCredential) is not found, give role as a parent only */
-        
-        if($studentsCredential) { 
-            foreach($getSelectedFathers as $user) {
-                $user->assignRole('Parent');
-                $user->save();
-            }
-        } else {
-            foreach($getSelectedFathers as $user) {
-                $user->assignRole(['Parent', 'Guardian']);
-                $user->save();
-            }
-        }
-
-        //////////////////////////////////////////
-
-        $getGuardianMaleUsername = \App\GuardianMaleRegistrars::select('username')->whereHas('student_registrars', function($q) use($ids) {
-            $q->whereIn('student_registrars.id', $ids);
-        })->get();
-
-        $isGuardianMalesExist = \App\User::whereIn('username', function($query) use($getGuardianMaleUsername) { //retrieve a collection of users from users table whereIn usernames. (continue below)
-            $query->select('username')->from('guardianmale_registrars')->whereIn('username', $getGuardianMaleUsername); //$query(whereIn usernames in table users) like selected usernames in father_registrars table. (To get selected usernames in father_registrars table, use whereIn('id', $ids) parameter.)
-        });
-
-        //Insert new guardian male
-        if($isGuardianMalesExist) {
-            $isGuardianMalesExist->forceDelete(); //prevent duplicate data in users table
-            $bulkUsers = \App\User::insert($new_GuardianMales);
-        } else {
-            $bulkUsers = \App\User::insert($new_GuardianMales);
-        }
- 
-        $getSelectedGuardianMales = \App\User::whereIn('username', function($query) use($getGuardianMaleUsername) { //retrieve a collection of users from users table whereIn usernames. (continue below)
-            $query->select('username')->from('guardianmale_registrars')->whereIn('username', $getGuardianMaleUsername); //$query(whereIn usernames in table users) like selected usernames in applicants table. (To get selected usernames in applicants table, use whereIn('id', $ids) parameter.)
-        })->get();
-
-        //check if guardian male has qualified adopted childern (students) (PROBLEM LAYS HERE)
-
-        //retrieve qualified student registrars username who has father username like $getGuardianMaleUsername
-        $studentsFatherUsername = \App\StudentRegistrars::withTrashed()->where('status', 'Qualified')->whereHas('father_registrars', function($q) use($getGuardianMaleUsername) {
-            $q->whereIn('father_registrars.username', $getGuardianMaleUsername);
-        })->select('username')->get();
-
-        $studentsFatherCredential = \App\StudentRegistrars::whereIn('username', $studentsFatherUsername); //if($studentsFatherCredential == 0) */
-
-        //retrieve father username who doesnt have qualified student registrars (adopted childerns)
-        /* $fatherUsername = \App\FatherRegistrars::withTrashed()->whereIn('username', $getGuardianMaleUsername)->doesntHave('student_registrars', 'and', function($q) {
-            $q->where('student_registrars.status', 'Qualified');
-        })->select('username')->get();
-
-        //retrieve a fathers (who doesnt have a qualified student registrars (childerns)). If the result is zero, give role as a parent only. 
-        $studentsFatherCredential = \App\User::whereIn('username', $fatherUsername); //if($studentsFatherCredential) */
-        
-        if($studentsFatherCredential) {  
-            foreach($getSelectedGuardianMales as $user) {
-                $user->assignRole('Guardian');
-                $user->save();
-            }
-        } else {
-            foreach($getSelectedGuardianMales as $user) {
-                $user->assignRole(['Parent', 'Guardian']);
-                $user->save();
-            }
-        }
-
-        //////////////////////////////////////////
-
-        $getMotherUsername = \App\MotherRegistrars::select('username')->whereHas('student_registrars', function($q) use($ids) {
-            $q->whereIn('student_registrars.id', $ids);
-        })->get();
-
-        $isMothersExist = \App\User::whereIn('username', function($query) use($getMotherUsername) { //retrieve a collection of users from users table whereIn usernames. (continue below)
-            $query->select('username')->from('mother_registrars')->whereIn('username', $getMotherUsername); //$query(whereIn usernames in table users) like selected usernames in father_registrars table. (To get selected usernames in father_registrars table, use whereIn('id', $ids) parameter.)
-        });
-
-        //Insert new mothers
-        if($isMothersExist) {
-            $isMothersExist->forceDelete(); //prevent duplicate data in users table
-            $bulkUsers = \App\User::insert($new_mothers);
-         } else {
-             $bulkUsers = \App\User::insert($new_mothers);
-         }
- 
-         $getSelectedMothers = \App\User::whereIn('username', function($query) use($getMotherUsername) { //retrieve a collection of users from users table whereIn usernames. (continue below)
-             $query->select('username')->from('mother_registrars')->whereIn('username', $getMotherUsername); //$query(whereIn usernames in table users) like selected usernames in applicants table. (To get selected usernames in applicants table, use whereIn('id', $ids) parameter.)
-         })->get();
-
-         //check if mother has qualified adopted childern (students) (PROBLEM LAYS HERE)
-
-        //retrieve a qualified student registrars username who has guardian female username like $getMotherUsername
-        $studentsGFUsername = \App\StudentRegistrars::withTrashed()->where('status', 'Qualified')->whereHas('guardianfemale_registrars', function($q) use($getMotherUsername) {
-            $q->whereIn('guardianfemale_registrars.username', $getMotherUsername);
-        })->select('username')->get();
-
-        $studentsGFCredential = \App\StudentRegistrars::whereIn('username', $studentsGFUsername)->count(); //if($studentsGFCredential == 0), give role as a parent only*/
-
-        //retrieve guardian female username who doesnt have qualified student registrars (adopted childerns)
-        /* $guardianFemaleUsername = \App\GuardianFemaleRegistrars::withTrashed()->whereIn('username', $getMotherUsername)->doesntHave('student_registrars', 'and', function($q) {
-            $q->where('student_registrars.status', 'Qualified');
-        })->select('username')->get();
-
-        //retrieve a guardian female (who doesnt have a qualified student registrars (adopted childerns)). If the result is zero, give role as a parent only. 
-        $guardianFemaleCredential = \App\User::whereIn('username', $guardianFemaleUsername); //if($guardianFemaleCredential) is not found, give role as a parent only */
-        
-        if($studentsGFCredential == 0) {
-            foreach($getSelectedMothers as $user) {
-                $user->assignRole('Parent');
-                $user->save();
-            }
-        } else {
-            foreach($getSelectedMothers as $user) {
-                $user->assignRole(['Parent', 'Guardian']);
-                $user->save();
-            }
-        }
-
-        //////////////////////////////////////////
-
-        $getGuardianFemaleUsername = \App\GuardianFemaleRegistrars::select('username')->whereHas('student_registrars', function($q) use($ids) {
-            $q->whereIn('student_registrars.id', $ids);
-        })->get();
-
-        $isGuardianFemalesExist = \App\User::whereIn('username', function($query) use($getGuardianFemaleUsername) { //retrieve a collection of users from users table whereIn usernames. (continue below)
-            $query->select('username')->from('guardianfemale_registrars')->whereIn('username', $getGuardianFemaleUsername); //$query(whereIn usernames in table users) like selected usernames in father_registrars table. (To get selected usernames in father_registrars table, use whereIn('id', $ids) parameter.)
-        });
-
-        //Insert new guardian female
-        if($isGuardianFemalesExist) {
-            $isGuardianFemalesExist->forceDelete(); //prevent duplicate data in users table
-            $bulkUsers = \App\User::insert($new_GuardianFemales);
-            //$bulkUsers = \App\User::insert($new_mothers);
-        } else {
-            $bulkUsers = \App\User::insert($new_GuardianFemales);
-        }
- 
-        $getSelectedGuardianFemales = \App\User::whereIn('username', function($query) use($getGuardianFemaleUsername) { //retrieve a collection of users from users table whereIn usernames. (continue below)
-            $query->select('username')->from('guardianfemale_registrars')->whereIn('username', $getGuardianFemaleUsername); //$query(whereIn usernames in table users) like selected usernames in applicants table. (To get selected usernames in applicants table, use whereIn('id', $ids) parameter.)
-        })->get();
-
-        //check if mother has qualified adopted childern (students) (PROBLEM LAYS HERE)
-
-        //retrieve qualified student registrars username who has mother username like $getGuardianFemaleUsername
-        $studentsMotherUsername = \App\StudentRegistrars::withTrashed()->where('status', 'Qualified')->whereHas('mother_registrars', function($q) use($getGuardianFemaleUsername) {
-            $q->whereIn('mother_registrars.username', $getGuardianFemaleUsername);
-        })->select('username')->get();
-
-        $studentsMotherCredential = \App\StudentRegistrars::whereIn('username', $studentsMotherUsername)->count();
-
-        //retrieve mother username who doesnt have qualified student registrars (adopted childerns)
-        /* $motherUsername = \App\MotherRegistrars::withTrashed()->whereIn('username', $getGuardianFemaleUsername)->doesntHave('student_registrars', 'and', function($q) {
-            $q->where('student_registrars.status', 'Qualified');
-        })->select('username')->get();
-
-        //retrieve a fathers (who doesnt have a qualified student registrars ( adoptedchilderns)). If the result is zero, give role as a parent only. 
-        $studentsMotherCredential = \App\User::whereIn('username', $motherUsername); //if($studentsFemtherCredential) */
-        
-        if($studentsMotherCredential == 0) {
-            foreach($getSelectedGuardianFemales as $user) {
-                $user->assignRole('Guardian');
-                $user->save();
-            }
-        } else {
-            foreach($getSelectedGuardianFemales as $user) {
-                $user->assignRole(['Parent', 'Guardian']);
-                $user->save();
-            }
-        }
-         
-        //////////////////////////////////////////
-
-        /* $users->each(function($user) {
-            Mail::to($user)->send(new SendEmail());
-        });
-
-        if(count(Mail::failures()) > 0) {
-            //The Mail::failures() will return an array of failed emails.
-            foreach(Mail::failures() as $sent_status) { 
-                $newData = \App\SentStatus::create(['email' => $sent_status]);
-                $newData->save();
-            }
-        } */
-
-        return response()->json(['success' => "Selected applicant(s) successfully approved."]);
     }
 
     public function showEligible(Request $request) {
